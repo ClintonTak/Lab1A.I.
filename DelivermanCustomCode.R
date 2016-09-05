@@ -17,12 +17,15 @@ customDM=function(roads,car,packages)
                       #run heuristic on x
                       #store package with lowest x
                       #go to package with lowest x after loop terminates 
-  }else { #decides which delivery to make 
-    toGo=car$load  
+  }else { #Write code for what to do once a package is picked up here
+  			#the code should use the A* formula to find the best way to the target destination
+  			#remember that each package has a unique destination stored in its matrix (columns 3 and 4)
+  	toGo=car$load  
     offset=2
   }
 }
 
+#current heuristic function, only gets manhattan distance of available packages
 heuristic = function(carX, carY, packageX, packageY) #x1 and y1 are current loc, x2 and y2 are destination
 {
   heuristicVal = c(1:length(packageX))
