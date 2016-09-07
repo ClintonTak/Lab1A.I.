@@ -11,27 +11,45 @@ customDM=function(roads,car,packages)
     notpickedup=which(packages[,5]==0) #list of packages that haven't been picked up
     packageX = package[notpickedup, 1]
     packageY = package[notpickedup, 2]
-    hVal = heuristic(carXCoord, carYCoord,packageX, packageY)
+    hVal = heuristic(carXCoord, carYCoord,packageX, packageY)#returns a list of the Heurstic vals of all available packages 
+    #minHVal = min(hVal)
+    #locationOfMinInhVal = which(hVal == minHVal) #gets location in hVal of lowest number
+    #nextpickuplocation = notpickedup[locationOfMinInhVal]
+    for (i in notpickedup){#iterates through available packages 
+      currentpackageinfo = packages[i,]
+      
+      leftorRight = currentpackageinfo[1] - carXCoord
+      if (leftorRight<0)#package is to the left of the car
+      {               #check left cost
     
-                      #for x in packages
-                      #run heuristic on x
-                      #store package with lowest x
-                      #go to package with lowest x after loop terminates 
-  }else { #Write code for what to do once a package is picked up here
-  			#the code should use the A* formula to find the best way to the target destination
-  			#remember that each package has a unique destination stored in its matrix (columns 3 and 4)
-  	toGo=car$load  
+      }
+      else #package is to the right of the car   
+      {#check right cost 
+        
+      }
+      uporDown = currentpackageinfo[2] - carYCoord
+      if (uporDown < 0)#package is below the car
+      {#check down cost 
+        
+        
+      }
+      else
+      {#check up cost 
+        
+        
+      }
+    }
+  }else { #decides which delivery to make 
+    toGo=car$load  
     offset=2
   }
 }
 
-#current heuristic function, only gets manhattan distance of available packages
 heuristic = function(carX, carY, packageX, packageY) #x1 and y1 are current loc, x2 and y2 are destination
 {
   heuristicVal = c(1:length(packageX))
   for (i in 1:length(packageX))
   {
-    print(i)
     heuristicVal[i] = abs(carX-packageX[i]) + abs(carY-packageY[i])
   }
   return(heuristicVal)
