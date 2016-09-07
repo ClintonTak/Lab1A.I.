@@ -40,15 +40,20 @@ customDM=function(roads,car,packages)
       }
       else
       {#check up cost 
-      else if(uporDown == 0){#package is left or right, don't do anything
-        
+      else if(uporDown==0){#package is left or right, don't do anything
+        vcost=0
         
       }
       else{#check up cost 
         vcost = roads$vroads[carYCoord+1]
         
       }
-      
+      if(vcost==0 & hcost!=0){
+        totalcost=hcost
+      }else if(vcost!=0 & hcost==0){
+        totalcost=vcost
+      }
+        
       currentpackagenumber = which(notpickedup == i)
       fStar = vcost + hVal[currentpackagenumber]
       c(fValues)
