@@ -31,13 +31,23 @@ customDM=function(roads,car,packages)
       if (uporDown < 0)#package is below the car
       {#check down cost 
         
+        vcost = roads$vroads[carYCoord-1]
         
       }
       else
       {#check up cost 
+      else if(uporDown == 0){#package is left or right, don't do anything
         
         
       }
+      else{#check up cost 
+        vcost = roads$vroads[carYCoord+1]
+        
+      }
+      
+      currentpackagenumber = which(notpickedup == i)
+      fStar = vcost + hVal[currentpackagenumber]
+      c(fValues)
     }
   }else { #decides which delivery to make 
     toGo=car$load  
