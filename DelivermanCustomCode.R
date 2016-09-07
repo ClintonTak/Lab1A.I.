@@ -21,11 +21,15 @@ customDM=function(roads,car,packages)
       leftorRight = currentpackageinfo[1] - carXCoord
       if (leftorRight<0)#package is to the left of the car
       {               #check left cost
-    
+        hCost=roads$hroads[carXCoord-1]
       }
-      else #package is to the right of the car   
+      else if(leftorRight==0) #package is on the horisontal axis   
       {#check right cost 
-        
+        hCost=0
+      }
+      else  #package is to the right of the car   
+      {#check right cost 
+        hCost=roads$hroads[carXCoord+1]
       }
       uporDown = currentpackageinfo[2] - carYCoord
       if (uporDown < 0)#package is below the car
