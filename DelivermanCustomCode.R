@@ -39,7 +39,7 @@ customDM=function(roads,car,packages)
       }
       else
       {#check up cost 
-      else if(uporDown==0){#package is left or right, don't do anything
+      if(uporDown==0){#package is left or right, don't do anything
         vcost=0
         
       }
@@ -60,6 +60,7 @@ customDM=function(roads,car,packages)
   }else { #decides which delivery to make 
     toGo=car$load  
     offset=2
+  }
   }
 }
 
@@ -98,6 +99,39 @@ avNodes <- function(x,y,roads){
     return(nodes=matrix(c(x,y-1,x+1,y,x-1,y),nrow=2,ncol=3))
   }else{
     return(nodes=matrix(c(x,y+1,x,y-1,x-1,y,x+1,y),nrow=2,ncol=4))
+  }
+}
+
+
+makeDelivery = function(roads,car,packages)
+{
+  currentpackage = which(packages[,5]==1) 
+  destinationX = currentpackage[3]
+  destinationY = currentpackage[4] 
+  while (currentpackage[5]==1){
+    hVal = abs(car$x-destinationX) + abs(car$y-destinationY)
+    if (car$y != 10){
+      gUp = roads$hroads[car$y+1]
+    }else{
+      gUp = 99999#give high value to discourage driving off the map
+    }
+    if (car$y!= 1){
+      gDown = roads$hroads[car$y-1]
+    }else{
+      gDown = 99999#give high value to discourage driving off the map
+    }
+    if (car$x != 10){
+      gRight = roads$vroads[car$x+1]
+    }else{
+      gRight = 99999#give high value to discourage driving off the map
+    }
+    if (car$x != 1){
+      gLeft = roads$vroads[car$x-1]
+    }else{
+      gLeft = 99999#give high value to discourage driving off the map 
+    }
+    gVals<-c(gUp,gDown,gRight,Gleft)
+    gLowest<-c(min(gVals), which(gVals == min(gVals))) 
   }
 }
 
