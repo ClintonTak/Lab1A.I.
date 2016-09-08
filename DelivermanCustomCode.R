@@ -6,8 +6,7 @@ customDM=function(roads,car,packages)
   toGo=0
   offset=0
   if (car$load==0) { #decides which package to pick up next 
-    carXCoord = car$x
-    carYCoord = car$y
+    carXCoord = car$x; carYCoord = car$y;
     notpickedup=which(packages[,5]==0) #list of packages that haven't been picked up
     packageX = package[notpickedup, 1]
     packageY = package[notpickedup, 2]
@@ -74,6 +73,33 @@ heuristic = function(carX, carY, packageX, packageY) #x1 and y1 are current loc,
   return(heuristicVal)
 }
 
+avNodes <- function(x,y,roads){
+  dim=length(roads$hroads[,1])
+  #nodes=matrix(nrow=5,ncol=2)
+  if(x==1){
+    if(y==1){
+      return(nodes=matrix(c(x,y+1,x+1,y),nrow=2,ncol=2))
+    }else if(y==dim){
+      return(nodes=matrix(c(x,y-1,x+1,y),nrow=2,ncol=2))
+    }else{
+      return(nodes=matrix(c(x,y+1,x,y-1,x+1,y),nrow=2,ncol=3))
+    }
+  }else if(x==dim){
+    if(y==1){
+      return(nodes=matrix(c(x,y+1,x-1,y),nrow=2,ncol=2))
+    }else if(y==dim){
+      return(nodes=matrix(c(x,y-1,x-1,y),nrow=2,ncol=2))
+    }else{
+      return(nodes=matrix(c(x,y+1,x,y-1,x-1,y),nrow=2,ncol=3))
+    }
+  }else if(y==1){
+    return(nodes=matrix(c(x,y+1,x+1,y,x-1,y),nrow=2,ncol=3))
+  }else if(y==dim){
+    return(nodes=matrix(c(x,y-1,x+1,y,x-1,y),nrow=2,ncol=3))
+  }else{
+    return(nodes=matrix(c(x,y+1,x,y-1,x-1,y,x+1,y),nrow=2,ncol=4))
+  }
+}
 
 
 
